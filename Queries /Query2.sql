@@ -1,6 +1,6 @@
 -- What's the DAU (Daily Active Users) trend?
-SELECT login_date,
+SELECT DATE(login_date) AS login_day,
        COUNT(DISTINCT viewer_id) AS Daily_Active_Users
 FROM `ott.Logins`
-GROUP BY login_date
-ORDER BY login_date;
+GROUP BY login_day
+ORDER BY login_day;
