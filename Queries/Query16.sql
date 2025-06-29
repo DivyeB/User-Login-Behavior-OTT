@@ -1,8 +1,8 @@
--- Peak login days across regions?
-SELECT viewer_id,login_date
-FROM (
-  SELECT viewer_id,login_date,
-         ROW_NUMBER() OVER (PARTITION BY viewer_id ORDER BY login_date DESC) AS rn
-  FROM ott.Logins
-) AS ranked
-WHERE rn = 1;
+-- Peak login days across regions
+SELECT v.country,
+       FORMAT_DATE('%A', l.login_date) AS day_of_week,
+       COUNT(*) AS logins
+FROM ott.Logins l
+JOIN ott.Viewers v ON l.viewer_id = v.viewer_id
+GROUP BY v.country, day_of_week
+ORDER BY v.country, logins DESC;
