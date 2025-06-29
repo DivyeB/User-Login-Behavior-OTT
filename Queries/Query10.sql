@@ -1,3 +1,4 @@
+-- Does login channel impact long-term usage?
 WITH login_counts AS (
   SELECT 
     viewer_id,
